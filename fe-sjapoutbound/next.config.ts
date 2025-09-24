@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  output: "standalone", // untuk deploy di Vercel, boleh ada
   images: {
     remotePatterns: [
       {
