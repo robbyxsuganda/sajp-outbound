@@ -1,15 +1,15 @@
-import HeroSection from '@/components/client/HeroSection';
-import FeaturedCardsSection from '@/components/client/FeaturedCardsSection';
-import ProductHighlightsSection from '@/components/client/ProductHighlightsSection';
-import IndonesianSpicesSection from '@/components/client/IndonesianSpicesSection';
-import SpiceManufacturerSection from '@/components/client/SpiceManufacturerSection';
-import AboutSectionNew from '@/components/client/AboutSectionNew';
-import SpiceProducerSection from '@/components/client/SpiceProducerSection';
-import NewsArticlesSection from '@/components/client/NewsArticlesSection';
-import InvestmentSection from '@/components/client/InvestmentSection';
-import ProductShowcaseSection from '@/components/client/ProductShowcaseSection';
+import HeroSection from "@/components/client/HeroSection";
+import FeaturedCardsSection from "@/components/client/FeaturedCardsSection";
+import ProductHighlightsSection from "@/components/client/ProductHighlightsSection";
+import IndonesianSpicesSection from "@/components/client/IndonesianSpicesSection";
+import SpiceManufacturerSection from "@/components/client/SpiceManufacturerSection";
+import AboutSectionNew from "@/components/client/AboutSectionNew";
+import SpiceProducerSection from "@/components/client/SpiceProducerSection";
+import NewsArticlesSection from "@/components/client/NewsArticlesSection";
+import InvestmentSection from "@/components/client/InvestmentSection";
+import ProductShowcaseSection from "@/components/client/ProductShowcaseSection";
 
-export default function HomePage() {
+export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -35,7 +35,6 @@ export default function HomePage() {
 
       {/* News & Articles Section */}
       <NewsArticlesSection />
-
 
       {/* Investment Section */}
       <InvestmentSection />
