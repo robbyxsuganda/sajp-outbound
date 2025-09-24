@@ -1,0 +1,425 @@
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  MapPin, Phone, Mail, Clock, 
+  Send, MessageCircle, CheckCircle 
+} from 'lucide-react';
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the form data to your backend
+    console.log('Form submitted:', formData);
+    setIsSubmitted(true);
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    }, 3000);
+  };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Address',
+      details: [
+        'Jl. Raya Bogor No. 123',
+        'Bogor, West Java, Indonesia',
+        '16111'
+      ]
+    },
+    {
+      icon: Phone,
+      title: 'Phone',
+      details: [
+        '+62 21 1234 5678',
+        '+62 812 3456 7890'
+      ]
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      details: [
+        'info@sajp.com',
+        'sales@sajp.com'
+      ]
+    },
+    {
+      icon: Clock,
+      title: 'Business Hours',
+      details: [
+        'Monday - Friday: 9:00 AM - 6:00 PM',
+        'Saturday: 9:00 AM - 2:00 PM',
+        'Sunday: Closed'
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary-green to-secondary-green-from py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Contact Us
+            </h1>
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+              Get in touch with our team for inquiries about products, partnerships, 
+              and business opportunities. We&apos;re here to help!
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Form & Info */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-text-dark mb-6">
+                  Send us a Message
+                </h2>
+                
+                {isSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-8"
+                  >
+                    <CheckCircle className="w-16 h-16 text-primary-green mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-text-dark mb-2">
+                      Message Sent Successfully!
+                    </h3>
+                    <p className="text-neutral-light-secondary">
+                      Thank you for contacting us. We&apos;ll get back to you within 24 hours.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-text-dark mb-2">
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-4 py-3 border border-neutral-light-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-text-dark mb-2">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-4 py-3 border border-neutral-light-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="company" className="block text-sm font-medium text-text-dark mb-2">
+                          Company Name
+                        </label>
+                        <input
+                          type="text"
+                          id="company"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-neutral-light-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-text-dark mb-2">
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 border border-neutral-light-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-medium text-text-dark mb-2">
+                        Subject *
+                      </label>
+                      <select
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 border border-neutral-light-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                      >
+                        <option value="">Select a subject</option>
+                        <option value="product-inquiry">Product Inquiry</option>
+                        <option value="partnership">Partnership Opportunity</option>
+                        <option value="pricing">Pricing Information</option>
+                        <option value="quality">Quality Standards</option>
+                        <option value="shipping">Shipping & Logistics</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-text-dark mb-2">
+                        Message *
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-3 border border-neutral-light-secondary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent"
+                        placeholder="Tell us about your requirements..."
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-primary-green hover:bg-primary-green/90 text-white px-6 py-4 rounded-lg font-semibold transition-all duration-300 btn-hover flex items-center justify-center space-x-2"
+                    >
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </button>
+                  </form>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Contact Information */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <h2 className="text-2xl font-bold text-text-dark mb-6">
+                  Get in Touch
+                </h2>
+                <p className="text-neutral-light-secondary mb-8">
+                  We&apos;re here to help you with your agricultural product needs. 
+                  Reach out to us through any of the channels below.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon;
+                  return (
+                    <motion.div
+                      key={info.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-4"
+                    >
+                      <div className="bg-primary-green/10 p-3 rounded-lg">
+                        <Icon className="w-6 h-6 text-primary-green" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-text-dark mb-2">
+                          {info.title}
+                        </h3>
+                        {info.details.map((detail, idx) => (
+                          <p key={idx} className="text-neutral-light-secondary">
+                            {detail}
+                          </p>
+                        ))}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* WhatsApp Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-r from-primary-green to-secondary-green-from rounded-xl p-6 text-white"
+              >
+                <h3 className="text-lg font-semibold mb-2">
+                  Quick Response
+                </h3>
+                <p className="text-white/90 mb-4">
+                  For immediate assistance, contact us via WhatsApp
+                </p>
+                <a
+                  href="https://wa.me/6281234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 bg-white text-primary-green px-6 py-3 rounded-lg font-semibold hover:bg-neutral-light-primary transition-all duration-300 btn-hover"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20 bg-neutral-light-primary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-text-dark mb-4">
+              Find Us
+            </h2>
+            <p className="text-lg text-neutral-light-secondary">
+              Visit our office in Bogor, West Java, Indonesia
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-xl shadow-lg overflow-hidden"
+          >
+            <div className="h-96">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.325!2d106.806!3d-6.597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzUnNDkuMiJTIDEwNsKwNDgnMjEuNiJF!5e0!3m2!1sen!2sid!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="SAJP Office Location"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-text-dark mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-neutral-light-secondary">
+              Common questions about our products and services
+            </p>
+          </motion.div>
+
+          <div className="space-y-6">
+            {[
+              {
+                question: "What is your minimum order quantity?",
+                answer: "Our minimum order quantity varies by product. For most items, we require a minimum of 1 ton. Please contact us for specific requirements."
+              },
+              {
+                question: "Do you provide samples?",
+                answer: "Yes, we provide samples for most of our products. Sample costs and shipping will be discussed based on your requirements."
+              },
+              {
+                question: "What certifications do you have?",
+                answer: "We are certified with ISO 22000, HACCP, and have organic certifications for specific products. All our products meet international quality standards."
+              },
+              {
+                question: "What are your shipping terms?",
+                answer: "We offer FOB, CIF, and CNF shipping terms. We work with reliable logistics partners to ensure timely delivery worldwide."
+              }
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl p-6 shadow-lg"
+              >
+                <h3 className="text-lg font-semibold text-text-dark mb-3">
+                  {faq.question}
+                </h3>
+                <p className="text-neutral-light-secondary">
+                  {faq.answer}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
