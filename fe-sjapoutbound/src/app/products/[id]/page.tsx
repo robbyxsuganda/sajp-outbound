@@ -1,27 +1,25 @@
-'use client';
+"use client";
 
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { products } from '@/data/products';
-import { Package, CheckCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
-import ProductCarousel from '@/components/client/ProductCarousel';
-import { useEffect, useState } from 'react';
-
-interface Product {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  image: string;
-}
+import { notFound } from "next/navigation";
+import { products, Product } from "@/data/products";
+import { useEffect, useState } from "react";
+import ProductCarousel from "@/components/client/ProductCarousel";
+import { motion } from "framer-motion";
+import ProductHeroSection from "@/components/client/ProductHeroSection";
+import ProductSpecificationsSection from "@/components/client/ProductSpecificationsSection";
+import ProductPhotosSection from "@/components/client/ProductPhotosSection";
+import ProductComparisonSection from "@/components/client/ProductComparisonSection";
+import ProductVideosSection from "@/components/client/ProductVideosSection";
+import ProductDetailsSection from "@/components/client/ProductDetailsSection";
+import ProductNewsSection from "@/components/client/ProductNewsSection";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default function ProductDetailPage({ params: paramsPromise }: ProductPageProps) {
+export default function ProductDetailPage({
+  params: paramsPromise,
+}: ProductPageProps) {
   const [params, setParams] = useState<{ id: string } | null>(null);
   const [product, setProduct] = useState<Product | null>(null);
 
@@ -40,7 +38,14 @@ export default function ProductDetailPage({ params: paramsPromise }: ProductPage
   }, [params]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-light-start to-neutral-light-end">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-green mx-auto mb-4"></div>
+          <p className="text-lg text-gray-600">Loading product details...</p>
+        </div>
+      </div>
+    );
   }
 
   const relatedProducts = products
@@ -48,70 +53,47 @@ export default function ProductDetailPage({ params: paramsPromise }: ProductPage
     .slice(0, 3);
 
   return (
-    <div className="bg-neutral-light-start py-16">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div className="relative">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={600}
-                height={400}
-                className="rounded-lg shadow-lg w-full"
-                priority
-              />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold text-text-dark mb-4">{product.name}</h1>
-              <p className="text-lg text-gray-600 mb-6">{product.category}</p>
-              <div className="prose max-w-none text-text-dark mb-8">
-                <p className="text-lg leading-relaxed">{product.description}</p>
-              </div>
-              <div className="flex items-center space-x-4 mb-8">
-                <div className="flex items-center text-primary-green">
-                  <CheckCircle className="w-5 h-5 mr-2" />
-                  <span className="font-medium">Premium Quality</span>
-                </div>
-                <div className="flex items-center text-primary-green">
-                  <Package className="w-5 h-5 mr-2" />
-                  <span className="font-medium">Export Ready</span>
-                </div>
-              </div>
-              <div className="flex space-x-4">
-                <button className="bg-primary-green hover:bg-secondary-green-start text-white font-bold py-3 px-8 rounded-full transition-colors">
-                  Request Quote
-                </button>
-                <Link
-                  href="/contact"
-                  className="border-2 border-primary-green text-primary-green hover:bg-primary-green hover:text-white font-bold py-3 px-8 rounded-full transition-colors"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+    <main className="min-h-screen">
+      {/* Product Hero Section */}
+      <ProductHeroSection product={product} />
 
-        {relatedProducts.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <ProductCarousel 
-                products={relatedProducts} 
-                title="Related Products" 
-              />
-            </div>
-          </motion.div>
-        )}
-      </div>
-    </div>
+      {/* Product Specifications */}
+      <ProductSpecificationsSection product={product} />
+
+      {/* Product Photos Gallery */}
+      <ProductPhotosSection product={product} />
+
+      {/* Grade Comparison */}
+      <ProductComparisonSection product={product} />
+
+      {/* Product Videos */}
+      <ProductVideosSection product={product} />
+
+      {/* Product Details & Features */}
+      <ProductDetailsSection product={product} />
+
+      {/* Related News Section */}
+      <ProductNewsSection product={product} />
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <section className="section-padding bg-gradient-to-br from-neutral-light-start to-neutral-light-end">
+          <div className="container-custom">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-white p-8 lg:p-12 rounded-3xl shadow-lg">
+                <ProductCarousel
+                  products={relatedProducts}
+                  title="Related Products"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+    </main>
   );
 }

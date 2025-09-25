@@ -1,15 +1,52 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, User } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
-import { newsArticles } from "@/data/news";
+import Link from "next/link";
+import { Calendar, User, ArrowRight } from "lucide-react";
+import { Product } from "@/data/products";
+import { newsArticles, NewsArticle } from "@/data/news";
 
-export default function NewsArticlesSection() {
-  const featuredArticles = newsArticles
-    .filter((article) => article.featured)
-    .slice(0, 6);
+interface ProductNewsSectionProps {
+  product: Product;
+}
+
+export default function ProductNewsSection({
+  product,
+}: ProductNewsSectionProps) {
+  // Filter news articles based on product category and tags
+  const getRelatedNews = (): NewsArticle[] => {
+    const productCategory = product.category.toLowerCase();
+    const productName = product.name.toLowerCase();
+
+    return newsArticles
+      .filter((article) => {
+        const articleTags = article.tags.map((tag) => tag.toLowerCase());
+        const articleTitle = article.title.toLowerCase();
+        const articleContent = article.content.toLowerCase();
+
+        // Check if article is related to the product category or contains product name
+        return (
+          articleTags.some(
+            (tag) =>
+              tag.includes(productCategory) ||
+              productCategory.includes(tag) ||
+              tag.includes(productName.split(" ")[0]) // Check first word of product name
+          ) ||
+          articleTitle.includes(productCategory) ||
+          articleTitle.includes(productName.split(" ")[0]) ||
+          articleContent.includes(productCategory) ||
+          articleContent.includes(productName.split(" ")[0])
+        );
+      })
+      .slice(0, 3); // Limit to 3 articles
+  };
+
+  const relatedNews = getRelatedNews();
+
+  if (relatedNews.length === 0) {
+    return null; // Don't render if no related news
+  }
 
   return (
     <section className="section-padding bg-gradient-to-br from-neutral-light-start to-neutral-light-end">
@@ -18,19 +55,19 @@ export default function NewsArticlesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-text-dark mb-6">
-            <span className="gradient-text">Latest News & Articles</span>
+          <h2 className="text-3xl lg:text-4xl font-bold text-text-dark mb-4">
+            Related News & Articles
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Stay updated with the latest news and insights from the Indonesian
-            spice industry.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Stay updated with the latest news and insights about {product.name}{" "}
+            and related topics
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredArticles.map((article, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedNews.map((article, index) => (
             <motion.article
               key={article.id}
               initial={{ opacity: 0, y: 20 }}
@@ -94,16 +131,26 @@ export default function NewsArticlesSection() {
           ))}
         </div>
 
+        {/* View All News CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-12"
         >
-          <Link href="/news" className="btn-primary text-lg px-8 py-4">
-            View All News
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
+          <div className="bg-white p-8 rounded-2xl shadow-lg">
+            <h3 className="text-2xl font-bold text-text-dark mb-4">
+              Want to Read More?
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Explore our complete collection of articles about Indonesian
+              spices and agricultural insights
+            </p>
+            <Link href="/news" className="btn-primary inline-flex items-center">
+              <span>View All News</span>
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
