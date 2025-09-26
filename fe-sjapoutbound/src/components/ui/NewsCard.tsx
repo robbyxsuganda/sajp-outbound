@@ -8,7 +8,7 @@ interface NewsCardProps {
   index?: number;
 }
 
-export default function NewsCard({ article, index = 0 }: NewsCardProps) {
+export default function NewsCard({ article }: NewsCardProps) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
       <Link href={`/news/${article.id}`}>
