@@ -40,7 +40,7 @@ export default function AboutPage() {
 
   return (
     <div className="bg-neutral-light-start py-16">
-      <div className="container mx-auto px-4">
+      <div className="container-custom">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

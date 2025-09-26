@@ -50,7 +50,7 @@ export default async function ProductsPage({ searchParams: searchParamsPromise }
     <div className="min-h-screen bg-neutral-light-start">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary-green to-secondary-green-start py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-custom">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Our Products
@@ -64,7 +64,7 @@ export default async function ProductsPage({ searchParams: searchParamsPromise }
 
       {/* Filters */}
       <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-custom">
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="flex-1">
               <div className="relative">
@@ -96,7 +96,7 @@ export default async function ProductsPage({ searchParams: searchParamsPromise }
 
       {/* Products Grid */}
       <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-custom">
           <Suspense fallback={<div className="text-center py-12">Loading products...</div>}>
             <ProductsGrid category={category} search={search} />
           </Suspense>
