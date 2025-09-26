@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Leaf, Globe, Award } from "lucide-react";
 import Link from "next/link";
 
-export default function AboutSectionNew() {
+export default function AboutSection() {
   return (
     <section className="flex overflow-hidden relative min-h-screen">
       {/* Left Content with Container */}

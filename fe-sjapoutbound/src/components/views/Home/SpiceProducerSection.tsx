@@ -10,7 +10,7 @@ import {
   Target,
 } from "lucide-react";
 
-export default function InvestmentSection() {
+export default function SpiceProducerSection() {
   return (
     <section className="overflow-hidden relative bg-gradient-to-br to-white from-neutral-light-start section-padding">
       {/* Background Pattern */}
@@ -45,19 +45,24 @@ export default function InvestmentSection() {
             viewport={{ once: true }}
           >
             <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-              Indonesia has one of the most abundant and extraordinary spices in the world, 
-              which is why other countries came during the era of the Majapahit Empire. Spices 
-              are a group of plants with very strong flavors and aromas, and are also great 
-              healing plants. Spices are the largest export commodity after shrimp, fish and coffee. 
-              The estimated amount of spices and herbs in Indonesia, most of which are not cultivated, 
-              but grow wild. Indonesia is known as the Mother of Spices because of its geographical 
-              advantages, and its spice products are still sought after by other countries. From USA, 
-              Vietnam, India, Netherlands, Singapore, Germany, Japan, Italy, Malaysia, France, China, 
-              Australia, Thailand, Belgium, South Korea, Brazil, United Kingdom, Russia, Canada and Pakistan. 
-              Fertile soil with the potential to produce some of the highest quality commodities in the world, 
-              we offer a wide range of products ready to ship anywhere in the world. We are committed to 
-              maintaining quality and want to help small communities achieve sustainable economic growth. 
-              Our products come from the best sources and we guarantee our customers will get the best supply 
+              Indonesia has one of the most abundant and extraordinary spices in
+              the world, which is why other countries came during the era of the
+              Majapahit Empire. Spices are a group of plants with very strong
+              flavors and aromas, and are also great healing plants. Spices are
+              the largest export commodity after shrimp, fish and coffee. The
+              estimated amount of spices and herbs in Indonesia, most of which
+              are not cultivated, but grow wild. Indonesia is known as the
+              Mother of Spices because of its geographical advantages, and its
+              spice products are still sought after by other countries. From
+              USA, Vietnam, India, Netherlands, Singapore, Germany, Japan,
+              Italy, Malaysia, France, China, Australia, Thailand, Belgium,
+              South Korea, Brazil, United Kingdom, Russia, Canada and Pakistan.
+              Fertile soil with the potential to produce some of the highest
+              quality commodities in the world, we offer a wide range of
+              products ready to ship anywhere in the world. We are committed to
+              maintaining quality and want to help small communities achieve
+              sustainable economic growth. Our products come from the best
+              sources and we guarantee our customers will get the best supply
               because all our products are of the best quality.
             </div>
 
@@ -162,9 +167,10 @@ export default function InvestmentSection() {
                   Spice Investment
                 </h3>
                 <p className="leading-relaxed text-gray-600">
-                  Strategic investments in plantations, production facilities and export 
-                  infrastructure for sustainable growth in the international spice market 
-                  with transparent reporting and proven results.
+                  Strategic investments in plantations, production facilities
+                  and export infrastructure for sustainable growth in the
+                  international spice market with transparent reporting and
+                  proven results.
                 </p>
               </div>
 

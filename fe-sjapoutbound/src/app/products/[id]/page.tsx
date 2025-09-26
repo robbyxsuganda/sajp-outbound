@@ -3,15 +3,15 @@
 import { notFound } from "next/navigation";
 import { products, Product } from "@/data/products";
 import { useEffect, useState } from "react";
-import ProductCarousel from "@/components/client/ProductCarousel";
+import ProductCarousel from "@/components/views/Products/ProductDetail/ProductCarousel";
 import { motion } from "framer-motion";
-import ProductHeroSection from "@/components/client/ProductHeroSection";
-import ProductSpecificationsSection from "@/components/client/ProductSpecificationsSection";
-import ProductPhotosSection from "@/components/client/ProductPhotosSection";
-import ProductComparisonSection from "@/components/client/ProductComparisonSection";
-import ProductVideosSection from "@/components/client/ProductVideosSection";
-import ProductDetailsSection from "@/components/client/ProductDetailsSection";
-import ProductNewsSection from "@/components/client/ProductNewsSection";
+import ProductHeroSection from "@/components/views/Products/ProductDetail/ProductHeroSection";
+import ProductSpecificationsSection from "@/components/views/Products/ProductDetail/ProductSpecificationsSection";
+import ProductPhotosSection from "@/components/views/Products/ProductDetail/ProductPhotosSection";
+import ProductComparisonSection from "@/components/views/Products/ProductDetail/ProductComparisonSection";
+import ProductVideosSection from "@/components/views/Products/ProductDetail/ProductVideosSection";
+import ProductDetailsSection from "@/components/views/Products/ProductDetail/ProductDetailsSection";
+import ProductNewsSection from "@/components/views/Products/ProductDetail/ProductNewsSection";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;

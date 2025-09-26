@@ -1,13 +1,13 @@
-import HeroSection from "@/components/client/HeroSection";
-import FeaturedCardsSection from "@/components/client/FeaturedCardsSection";
-import ProductHighlightsSection from "@/components/client/ProductHighlightsSection";
-import IndonesianSpicesSection from "@/components/client/IndonesianSpicesSection";
-import SpiceManufacturerSection from "@/components/client/SpiceManufacturerSection";
-import AboutSectionNew from "@/components/client/AboutSectionNew";
-import SpiceProducerSection from "@/components/client/SpiceProducerSection";
-import NewsArticlesSection from "@/components/client/NewsArticlesSection";
-import InvestmentSection from "@/components/client/InvestmentSection";
-import ProductShowcaseSection from "@/components/client/ProductShowcaseSection";
+import HeroSection from "@/components/views/Home/HeroSection";
+import FeaturedCardsSection from "@/components/views/Home/FeaturedCardsSection";
+import ProductHighlightsSection from "@/components/views/Home/ProductHighlightsSection";
+import IndonesianSpicesSection from "@/components/views/Home/IndonesianSpicesSection";
+import SpiceManufacturerSection from "@/components/views/Home/SpiceManufacturerSection";
+import AboutSectionNew from "@/components/views/Home/AboutSection";
+import SpiceProducerSection from "@/components/views/Home/SpiceProducerSection";
+import NewsArticlesSection from "@/components/views/Home/NewsArticlesSection";
+import InvestmentSection from "@/components/views/Home/InvestmentSection";
+import ProductShowcaseSection from "@/components/views/Home/ProductShowcaseSection";
 
 export default function Home() {
   return (
